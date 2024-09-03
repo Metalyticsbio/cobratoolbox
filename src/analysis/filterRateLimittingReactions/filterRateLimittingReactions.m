@@ -19,7 +19,7 @@ function filterRateLimittingReactions(phenotype)
 %       - Farid Zare      11/21/2023 - Correction of repository address format 
 %
 
-    dest = ['resultsPostOptimization', filesep, 'contextSpecificModels', filesep, '*', phenotype, '*.xls'];
+    dest = string(strcat('resultsPostOptimization/contextSpecificModels/*', phenotype, '*.xls'));
     S = dir(dest);
     count = length(S);
 
@@ -29,7 +29,7 @@ function filterRateLimittingReactions(phenotype)
 
     for i=1:1:count
         sheetName = 'Reaction List';
-        filename = strcat(S(i).folder, filesep, S(i).name);
+        filename = strcat(S(i).folder, '/', S(i).name);
         data=readtable(filename,'Sheet',sheetName);
 
         % Copy headers
@@ -81,12 +81,12 @@ function filterRateLimittingReactions(phenotype)
     end
     
     % Save results
-    folderName = fullfile('resultsPostOptimization', 'rateLimittingReactions');
+    folderName = 'resultsPostOptimization/rateLimittingReactions/';
     if ~exist(folderName, 'dir')
        mkdir(folderName)
     end
 
-    excelFileName = string(strcat(folderName, filesep, '_rate_limitting_reactions', phenotype, '.xls'));
+    excelFileName = string(strcat(folderName,'_rate_limitting_reactions', phenotype, '.xls'));
     for n=1:1:length(resultAll)
         sheet1Name = strrep(S(n).name,'.xls','');
         writecell(resultAll{n},excelFileName,'Sheet',sheet1Name,'AutoFitWidth',false);

@@ -16,9 +16,9 @@ function filterNonFluxReactions(phenotype)
 % .. Authors:
 %       - Kristina Grausa 05/16/2022
 %       - Kristina Grausa 08/23/2022 - standard header and formatting
-%       - Farid Zare      02/12/2024 - Repository addresses are correcteds
+%       - Farid Zare      20/11/2023 - Repository addresses are correcteds
 
-    dest = ['resultsPostOptimization', filesep, 'contextSpecificModels', filesep, '*', phenotype, '*.*'];
+    dest = string(strcat('resultsPostOptimization/contextSpecificModels/*', phenotype, '*.*'));
     S = dir(dest);
     count = length(S);
 
@@ -28,7 +28,7 @@ function filterNonFluxReactions(phenotype)
 
     for i=1:1:count
         sheetName = 'Reaction List';
-        filename = strcat(S(i).folder, filesep, S(i).name);
+        filename = strcat(S(i).folder, '/', S(i).name);
         data=readtable(filename,'Sheet',sheetName);
 
         % Copy headers
@@ -76,7 +76,7 @@ function filterNonFluxReactions(phenotype)
     end
     
     % Save results
-    folderName = fullfile('resultsPostOptimization', 'nonFluxReactions');
+    folderName = 'resultsPostOptimization/nonFluxReactions/';
     if ~exist(folderName, 'dir')
        mkdir(folderName)
     end

@@ -80,8 +80,7 @@ assert(isequal(printMet, {'(1) a';'(2) b';'(3) c'}))
 
 % TEST createMultipleSpeciesModel and printUptakeBoundCom with a model with host organism
 % build a model with host
-biomassNames = {'BIOMASS', 'BIOMASS'};
-modelWtHost = createMultipleSpeciesModel({org1; org2}, biomassNames, 'nameTagsModels', {'Org1'; 'Org2'}, 'modelHost', org1, 'nameTagHost', 'Org3');
+modelWtHost = createMultipleSpeciesModel({org1; org2}, 'nameTagsModels', {'Org1'; 'Org2'}, 'modelHost', org1, 'nameTagHost', 'Org3');
 % get IDs
 [modelWtHost.infoCom, modelWtHost.indCom] = getMultiSpeciesModelId(modelWtHost, {'Org1'; 'Org2'}, 'Org3');
 % change some uptake bounds
@@ -275,7 +274,7 @@ for jTest = 1:2
         else
             %warning(text1{1})
         end
-
+        
         delete('SteadyCom_saveModel.txt');
         % check saved files
         if jTest == 1
@@ -631,7 +630,5 @@ if ~isempty(origSolver) && ~strcmp(CBT_LP_SOLVER, origSolver)
     changeCobraSolver(origSolver, 'LP');
 end
 
-% output a success message
-fprintf('Done.\n');
 % change the directory
 cd(currentDir)
