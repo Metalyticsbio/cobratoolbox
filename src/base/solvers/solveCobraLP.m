@@ -122,7 +122,8 @@ global MINOS_PATH
 [problemTypeParams, solverParams] = parseSolverParameters('LP',varargin{:});
 
 % set the solver
-solver = problemTypeParams.solver;
+%solver = problemTypeParams.solver;
+solver = 'glpk';
 
 % check solver compatibility with minNorm option
 if ~isempty(problemTypeParams.minNorm)
@@ -223,7 +224,6 @@ origStatText = [];
 algorithm = 'default';
 
 t_start = clock;
-changeCobraSolver('glpk', 'LP');
 if isempty(solver)
     error('Default LP solver not selected. Initialise the COBRA Toolbox with: initCobraToolbox')
 end
