@@ -123,8 +123,8 @@ global MINOS_PATH
 
 % set the solver
 %solver = problemTypeParams.solver;
-%solver = 'glpk';
-changeCobraSolver('LP', 'glpk')
+solver = 'glpk';
+% changeCobraSolver('glpk')
 
 
 % check solver compatibility with minNorm option
