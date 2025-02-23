@@ -223,7 +223,7 @@ origStatText = [];
 algorithm = 'default';
 
 t_start = clock;
-solver = 'glpk';
+changeCobraSolver('glpk', 'LP');
 if isempty(solver)
     error('Default LP solver not selected. Initialise the COBRA Toolbox with: initCobraToolbox')
 end
